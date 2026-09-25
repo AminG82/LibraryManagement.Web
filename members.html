@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Members - Library Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">Library Management</div>
+
+    <div class="nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="books.html">Books</a>
+        <a href="members.html" class="active">Members</a>
+        <a href="borrowings.html">Borrowings</a>
+    </div>
+</nav>
+
+
+<main class="container">
+
+    <div class="page-header">
+        <h1>Members</h1>
+
+        <button class="btn btn-primary" onclick="openMemberForm()">
+            Add Member
+        </button>
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+
+    <!-- Member Form -->
+
+    <div id="memberFormContainer" class="form-container hidden">
+
+        <h2 id="formTitle">Add Member</h2>
+
+        <form id="memberForm">
+
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nationalCode">National Code</label>
+                <input type="text" id="nationalCode" maxlength="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone">
+            </div>
+
+            <div class="form-actions">
+
+                <button type="submit" class="btn btn-primary">
+                    Save
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeMemberForm()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Members Table -->
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>National Code</th>
+                <th>Phone</th>
+                <th>Register Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody id="membersTableBody">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+
+<script src="js/api.js"></script>
+<script src="js/members.js"></script>
+
+</body>
+</html>
