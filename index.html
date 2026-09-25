@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">Library Management</div>
+
+    <div class="nav-links">
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="books.html">Books</a>
+        <a href="members.html">Members</a>
+        <a href="borrowings.html">Borrowings</a>
+    </div>
+</nav>
+
+
+<main class="container">
+
+    <h1>Dashboard</h1>
+
+    <div id="errorMessage" class="error-message"></div>
+
+    <div class="dashboard-grid">
+
+        <div class="stat-card">
+            <h3>Total Books</h3>
+            <p id="totalBooks">-</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Available Books</h3>
+            <p id="availableBooks">-</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Borrowed Books</h3>
+            <p id="borrowedBooks">-</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Members</h3>
+            <p id="totalMembers">-</p>
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
