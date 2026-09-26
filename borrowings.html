@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Borrowings - Library Management</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-brand">
+        Library Management
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="books.html">Books</a>
+        <a href="members.html">Members</a>
+        <a href="borrowings.html">Borrowings</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <div class="page-header">
+        <h1>Borrowings</h1>
+    </div>
+
+    <!-- Create Borrowing -->
+    <div class="form-container">
+
+        <h2>Borrow a Book</h2>
+
+        <form id="borrowingForm">
+
+            <div class="form-group">
+                <label for="bookId">Book</label>
+
+                <select id="bookId" required>
+                    <option value="">Select a book</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="memberId">Member</label>
+
+                <select id="memberId" required>
+                    <option value="">Select a member</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Borrow Book
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Message -->
+    <div id="message" class="message hidden"></div>
+
+    <!-- Borrowings Table -->
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Book</th>
+                    <th>Member</th>
+                    <th>Borrow Date</th>
+                    <th>Return Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="borrowingsTableBody">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/borrowings.js"></script>
+
+</body>
+</html>
