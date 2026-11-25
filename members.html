@@ -3,118 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Members - Library Management</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-
 <body>
+    <header class="header" role="banner">
+        <a href="index.html" class="header__brand" aria-label="Library Management Home">
+            <svg class="header__brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <path d="M8 10h8"/>
+                <path d="M8 14h5"/>
+            </svg>
+            Library Management
+        </a>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="index.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                Dashboard
+            </a>
+            <a href="books.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                Books
+            </a>
+            <a href="members.html" class="header__nav-link header__nav-link--active" aria-current="page">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                </svg>
+                Members
+            </a>
+            <a href="borrowings.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+                Borrowings
+            </a>
+        </nav>
+    </header>
 
-<nav class="navbar">
-    <div class="logo">Library Management</div>
+    <main class="main" role="main">
+        <div class="container">
+            <header class="page-header">
+                <div>
+                    <h1 class="page-header__title">Members</h1>
+                    <p class="page-header__subtitle">Manage library members</p>
+                </div>
+                <div class="page-header__actions">
+                    <button class="btn btn--primary" onclick="openMemberForm()" aria-label="Add new member">
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        Add Member
+                    </button>
+                </div>
+            </header>
 
-    <div class="nav-links">
-        <a href="index.html">Dashboard</a>
-        <a href="books.html">Books</a>
-        <a href="members.html" class="active">Members</a>
-        <a href="borrowings.html">Borrowings</a>
-    </div>
-</nav>
+            <div id="message" class="alert alert--hidden" role="alert" aria-live="polite"></div>
 
+            <!-- Member Form Modal -->
+            <div id="memberFormModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="memberFormTitle">
+                <div class="modal">
+                    <header class="modal__header">
+                        <h2 class="modal__title" id="memberFormTitle">Add Member</h2>
+                        <button class="modal__close" onclick="closeMemberForm()" aria-label="Close form">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M18 6L6 18M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </header>
+                    <form id="memberForm" class="modal__body form" novalidate>
+                        <div class="form__row">
+                            <div class="form__group">
+                                <label for="firstName" class="form__label">First Name <span aria-hidden="true">*</span></label>
+                                <input type="text" id="firstName" class="form__input" required autocomplete="given-name">
+                            </div>
+                            <div class="form__group">
+                                <label for="lastName" class="form__label">Last Name <span aria-hidden="true">*</span></label>
+                                <input type="text" id="lastName" class="form__input" required autocomplete="family-name">
+                            </div>
+                        </div>
 
-<main class="container">
+                        <div class="form__row">
+                            <div class="form__group">
+                                <label for="nationalCode" class="form__label">National Code <span aria-hidden="true">*</span></label>
+                                <input type="text" id="nationalCode" class="form__input" maxlength="10" required autocomplete="off" placeholder="10 digits">
+                            </div>
+                            <div class="form__group">
+                                <label for="phone" class="form__label">Phone</label>
+                                <input type="tel" id="phone" class="form__input" autocomplete="tel" placeholder="+98 9XX XXX XXXX">
+                            </div>
+                        </div>
 
-    <div class="page-header">
-        <h1>Members</h1>
-
-        <button class="btn btn-primary" onclick="openMemberForm()">
-            Add Member
-        </button>
-    </div>
-
-
-    <div id="message" class="message"></div>
-
-
-    <!-- Member Form -->
-
-    <div id="memberFormContainer" class="form-container hidden">
-
-        <h2 id="formTitle">Add Member</h2>
-
-        <form id="memberForm">
-
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" required>
+                        <footer class="form__actions modal__footer">
+                            <button type="button" class="btn btn--secondary" onclick="closeMemberForm()">Cancel</button>
+                            <button type="submit" class="btn btn--primary">
+                                <span id="memberFormSubmitText">Save</span>
+                            </button>
+                        </footer>
+                    </form>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" required>
+            <!-- Members Table -->
+            <div class="card">
+                <div class="table-wrapper">
+                    <table class="table" role="grid">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">National Code</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Register Date</th>
+                                <th scope="col"><span class="sr-only">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersTableBody">
+                            <!-- Rows inserted by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="membersEmptyState" class="empty-state hidden" aria-hidden="true">
+                    <svg class="empty-state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                    </svg>
+                    <h3 class="empty-state__title">No members yet</h3>
+                    <p class="empty-state__description">Add your first member to start managing borrowings.</p>
+                    <button class="btn btn--primary mt-4" onclick="openMemberForm()">
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        </svg>
+                        Add Member
+                    </button>
+                </div>
             </div>
+        </div>
+    </main>
 
-            <div class="form-group">
-                <label for="nationalCode">National Code</label>
-                <input type="text" id="nationalCode" maxlength="10" required>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" id="phone">
-            </div>
-
-            <div class="form-actions">
-
-                <button type="submit" class="btn btn-primary">
-                    Save
-                </button>
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="closeMemberForm()">
-                    Cancel
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-
-    <!-- Members Table -->
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>National Code</th>
-                <th>Phone</th>
-                <th>Register Date</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-
-            <tbody id="membersTableBody">
-            </tbody>
-
-        </table>
-
-    </div>
-
-</main>
-
-
-<script src="js/api.js"></script>
-<script src="js/members.js"></script>
-
+    <script src="js/api.js"></script>
+    <script src="js/members.js"></script>
 </body>
 </html>

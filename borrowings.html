@@ -3,97 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Borrowings - Library Management</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-
 <body>
+    <header class="header" role="banner">
+        <a href="index.html" class="header__brand" aria-label="Library Management Home">
+            <svg class="header__brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <path d="M8 10h8"/>
+                <path d="M8 14h5"/>
+            </svg>
+            Library Management
+        </a>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="index.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                Dashboard
+            </a>
+            <a href="books.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                Books
+            </a>
+            <a href="members.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                </svg>
+                Members
+            </a>
+            <a href="borrowings.html" class="header__nav-link header__nav-link--active" aria-current="page">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+                Borrowings
+            </a>
+        </nav>
+    </header>
 
-<nav class="navbar">
-    <div class="nav-brand">
-        Library Management
-    </div>
+    <main class="main" role="main">
+        <div class="container">
+            <header class="page-header">
+                <div>
+                    <h1 class="page-header__title">Borrowings</h1>
+                    <p class="page-header__subtitle">Track book loans and returns</p>
+                </div>
+            </header>
 
-    <div class="nav-links">
-        <a href="index.html">Dashboard</a>
-        <a href="books.html">Books</a>
-        <a href="members.html">Members</a>
-        <a href="borrowings.html">Borrowings</a>
-    </div>
-</nav>
+            <div id="message" class="alert alert--hidden" role="alert" aria-live="polite"></div>
 
-<main class="container">
-
-    <div class="page-header">
-        <h1>Borrowings</h1>
-    </div>
-
-    <!-- Create Borrowing -->
-    <div class="form-container">
-
-        <h2>Borrow a Book</h2>
-
-        <form id="borrowingForm">
-
-            <div class="form-group">
-                <label for="bookId">Book</label>
-
-                <select id="bookId" required>
-                    <option value="">Select a book</option>
-                </select>
+            <!-- Create Borrowing Form -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card__header">
+                    <h3 class="card__title">Borrow a Book</h3>
+                </div>
+                <form id="borrowingForm" class="card__body form">
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label for="bookId" class="form__label">Book <span aria-hidden="true">*</span></label>
+                            <select id="bookId" class="form__select" required>
+                                <option value="">Select a book</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="memberId" class="form__label">Member <span aria-hidden="true">*</span></label>
+                            <select id="memberId" class="form__select" required>
+                                <option value="">Select a member</option>
+                            </select>
+                        </div>
+                    </div>
+                    <footer class="form__actions">
+                        <button type="submit" class="btn btn--primary">
+                            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            Borrow Book
+                        </button>
+                    </footer>
+                </form>
             </div>
 
-            <div class="form-group">
-                <label for="memberId">Member</label>
-
-                <select id="memberId" required>
-                    <option value="">Select a member</option>
-                </select>
+            <!-- Borrowings Table -->
+            <div class="card">
+                <div class="table-wrapper">
+                    <table class="table" role="grid">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Book</th>
+                                <th scope="col">Member</th>
+                                <th scope="col">Borrow Date</th>
+                                <th scope="col">Return Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"><span class="sr-only">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="borrowingsTableBody">
+                            <!-- Rows inserted by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="borrowingsEmptyState" class="empty-state hidden" aria-hidden="true">
+                    <svg class="empty-state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        <path d="M12 8v8"/>
+                        <path d="M8 12h8"/>
+                    </svg>
+                    <h3 class="empty-state__title">No borrowings yet</h3>
+                    <p class="empty-state__description">Create a borrowing record when a member borrows a book.</p>
+                </div>
             </div>
+        </div>
+    </main>
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
-                    Borrow Book
-                </button>
-            </div>
-
-        </form>
-
-    </div>
-
-    <!-- Message -->
-    <div id="message" class="message hidden"></div>
-
-    <!-- Borrowings Table -->
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Book</th>
-                    <th>Member</th>
-                    <th>Borrow Date</th>
-                    <th>Return Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody id="borrowingsTableBody">
-            </tbody>
-
-        </table>
-
-    </div>
-
-</main>
-
-<script src="js/api.js"></script>
-<script src="js/borrowings.js"></script>
-
+    <script src="js/api.js"></script>
+    <script src="js/borrowings.js"></script>
 </body>
 </html>

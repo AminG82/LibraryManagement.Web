@@ -3,61 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Library Management</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-
 <body>
+    <header class="header" role="banner">
+        <a href="index.html" class="header__brand" aria-label="Library Management Home">
+            <svg class="header__brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <path d="M8 10h8"/>
+                <path d="M8 14h5"/>
+            </svg>
+            Library Management
+        </a>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="index.html" class="header__nav-link header__nav-link--active" aria-current="page">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                Dashboard
+            </a>
+            <a href="books.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                Books
+            </a>
+            <a href="members.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Members
+            </a>
+            <a href="borrowings.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+                Borrowings
+            </a>
+        </nav>
+    </header>
 
-<nav class="navbar">
-    <div class="logo">Library Management</div>
+    <main class="main" role="main">
+        <div class="container">
+            <header class="page-header">
+                <div>
+                    <h1 class="page-header__title">Dashboard</h1>
+                    <p class="page-header__subtitle">Overview of your library statistics</p>
+                </div>
+            </header>
 
-    <div class="nav-links">
-        <a href="index.html" class="active">Dashboard</a>
-        <a href="books.html">Books</a>
-        <a href="members.html">Members</a>
-        <a href="borrowings.html">Borrowings</a>
-    </div>
-</nav>
+            <div id="errorMessage" class="alert alert--error alert--hidden" role="alert" aria-live="polite">
+                <svg class="alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4M12 16h.01"/>
+                </svg>
+                <span id="errorMessageText"></span>
+            </div>
 
+            <div class="stats-grid" role="region" aria-label="Library statistics">
+                <article class="stat-card">
+                    <div class="stat-card__icon stat-card__icon--blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <div class="stat-card__label">Total Books</div>
+                    <div class="stat-card__value" id="totalBooks">—</div>
+                </article>
 
-<main class="container">
+                <article class="stat-card">
+                    <div class="stat-card__icon stat-card__icon--green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="stat-card__label">Available Books</div>
+                    <div class="stat-card__value" id="availableBooks">—</div>
+                </article>
 
-    <h1>Dashboard</h1>
+                <article class="stat-card">
+                    <div class="stat-card__icon stat-card__icon--orange">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            <path d="M10 10l4 4m0-4l-4 4"/>
+                        </svg>
+                    </div>
+                    <div class="stat-card__label">Borrowed Books</div>
+                    <div class="stat-card__value" id="borrowedBooks">—</div>
+                </article>
 
-    <div id="errorMessage" class="error-message"></div>
-
-    <div class="dashboard-grid">
-
-        <div class="stat-card">
-            <h3>Total Books</h3>
-            <p id="totalBooks">-</p>
+                <article class="stat-card">
+                    <div class="stat-card__icon stat-card__icon--purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div class="stat-card__label">Total Members</div>
+                    <div class="stat-card__value" id="totalMembers">—</div>
+                </article>
+            </div>
         </div>
+    </main>
 
-        <div class="stat-card">
-            <h3>Available Books</h3>
-            <p id="availableBooks">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Borrowed Books</h3>
-            <p id="borrowedBooks">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Total Members</h3>
-            <p id="totalMembers">-</p>
-        </div>
-
-    </div>
-
-</main>
-
-
-<script src="js/api.js"></script>
-<script src="js/dashboard.js"></script>
-
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

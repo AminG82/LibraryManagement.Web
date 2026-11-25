@@ -3,127 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Books - Library Management</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-
 <body>
+    <header class="header" role="banner">
+        <a href="index.html" class="header__brand" aria-label="Library Management Home">
+            <svg class="header__brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <path d="M8 10h8"/>
+                <path d="M8 14h5"/>
+            </svg>
+            Library Management
+        </a>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="index.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                Dashboard
+            </a>
+            <a href="books.html" class="header__nav-link header__nav-link--active" aria-current="page">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                Books
+            </a>
+            <a href="members.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                </svg>
+                Members
+            </a>
+            <a href="borrowings.html" class="header__nav-link">
+                <svg class="header__nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+                Borrowings
+            </a>
+        </nav>
+    </header>
 
-<nav class="navbar">
-    <div class="logo">Library Management</div>
+    <main class="main" role="main">
+        <div class="container">
+            <header class="page-header">
+                <div>
+                    <h1 class="page-header__title">Books</h1>
+                    <p class="page-header__subtitle">Manage your library catalog</p>
+                </div>
+                <div class="page-header__actions">
+                    <button class="btn btn--primary" onclick="openBookForm()" aria-label="Add new book">
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        Add Book
+                    </button>
+                </div>
+            </header>
 
-    <div class="nav-links">
-        <a href="index.html">Dashboard</a>
-        <a href="books.html" class="active">Books</a>
-        <a href="members.html">Members</a>
-        <a href="borrowings.html">Borrowings</a>
-    </div>
-</nav>
+            <div id="message" class="alert alert--hidden" role="alert" aria-live="polite"></div>
 
+            <!-- Book Form Modal -->
+            <div id="bookFormModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="bookFormTitle">
+                <div class="modal">
+                    <header class="modal__header">
+                        <h2 class="modal__title" id="bookFormTitle">Add Book</h2>
+                        <button class="modal__close" onclick="closeBookForm()" aria-label="Close form">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M18 6L6 18M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </header>
+                    <form id="bookForm" class="modal__body form" novalidate>
+                        <input type="hidden" id="bookId">
 
-<main class="container">
+                        <div class="form__row">
+                            <div class="form__group">
+                                <label for="title" class="form__label">Title <span aria-hidden="true">*</span></label>
+                                <input type="text" id="title" class="form__input" required autocomplete="off">
+                            </div>
+                            <div class="form__group">
+                                <label for="author" class="form__label">Author <span aria-hidden="true">*</span></label>
+                                <input type="text" id="author" class="form__input" required autocomplete="off">
+                            </div>
+                        </div>
 
-    <div class="page-header">
-        <h1>Books</h1>
+                        <div class="form__row">
+                            <div class="form__group">
+                                <label for="isbn" class="form__label">ISBN</label>
+                                <input type="text" id="isbn" class="form__input" placeholder="e.g., 978-0134685991" autocomplete="off">
+                            </div>
+                            <div class="form__group">
+                                <label for="categoryId" class="form__label">Category <span aria-hidden="true">*</span></label>
+                                <select id="categoryId" class="form__select" required>
+                                    <option value="">Select Category</option>
+                                </select>
+                            </div>
+                        </div>
 
-        <button class="btn btn-primary" onclick="openBookForm()">
-            Add Book
-        </button>
-    </div>
+                        <div class="form__group">
+                            <label for="totalCount" class="form__label">Total Count <span aria-hidden="true">*</span></label>
+                            <input type="number" id="totalCount" class="form__input" min="1" required>
+                        </div>
 
-
-    <div id="message" class="message"></div>
-
-
-    <!-- Book Form -->
-
-    <div id="bookFormContainer" class="form-container hidden">
-
-        <h2 id="formTitle">Add Book</h2>
-
-        <form id="bookForm">
-
-            <input type="hidden" id="bookId">
-
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id="title" required>
+                        <footer class="form__actions modal__footer">
+                            <button type="button" class="btn btn--secondary" onclick="closeBookForm()">Cancel</button>
+                            <button type="submit" class="btn btn--primary">
+                                <span id="bookFormSubmitText">Save</span>
+                            </button>
+                        </footer>
+                    </form>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" id="author" required>
+            <!-- Books Table -->
+            <div class="card">
+                <div class="table-wrapper">
+                    <table class="table" role="grid">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Available</th>
+                                <th scope="col"><span class="sr-only">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                            <!-- Rows inserted by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="booksEmptyState" class="empty-state hidden" aria-hidden="true">
+                    <svg class="empty-state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <h3 class="empty-state__title">No books yet</h3>
+                    <p class="empty-state__description">Get started by adding your first book to the catalog.</p>
+                    <button class="btn btn--primary mt-4" onclick="openBookForm()">
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        Add Book
+                    </button>
+                </div>
             </div>
+        </div>
+    </main>
 
-            <div class="form-group">
-                <label for="isbn">ISBN</label>
-                <input type="text" id="isbn">
-            </div>
-
-            <div class="form-group">
-                <label for="categoryId">Category</label>
-                <select id="categoryId" required>
-                    <option value="">Select Category</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="totalCount">Total Count</label>
-                <input type="number" id="totalCount" min="1" required>
-            </div>
-
-            <div class="form-actions">
-
-                <button type="submit" class="btn btn-primary">
-                    Save
-                </button>
-
-                <button type="button"
-                        class="btn btn-secondary"
-                        onclick="closeBookForm()">
-                    Cancel
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-
-    <!-- Books Table -->
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-                <th>Category</th>
-                <th>Total</th>
-                <th>Available</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-
-            <tbody id="booksTableBody">
-            </tbody>
-
-        </table>
-
-    </div>
-
-</main>
-
-
-<script src="js/api.js"></script>
-<script src="js/books.js"></script>
-
+    <script src="js/api.js"></script>
+    <script src="js/books.js"></script>
 </body>
 </html>
